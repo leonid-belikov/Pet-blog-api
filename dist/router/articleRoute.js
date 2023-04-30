@@ -7,5 +7,6 @@ exports.articleRoute.get('/', function (req, res) {
     res.send({ msg: 'Yoyoyo2' });
 });
 exports.articleRoute.post('/', function (req, res) {
-    res.send({ msg: 'Yoyoyo2 post' });
+    var text = req.body.text;
+    res.send({ msg: "Yoyoyo2 post, text: ".concat(text) });
 });

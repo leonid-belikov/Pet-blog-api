@@ -7,5 +7,6 @@ articleRoute.get('/', (req: Request, res: Response) => {
 })
 
 articleRoute.post('/', (req: Request, res: Response) => {
-    res.send({ msg: 'Yoyoyo2 post' })
+    const text = req.body.text
+    res.send({ msg: `Yoyoyo2 post, text: ${text}` })
 })
