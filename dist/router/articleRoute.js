@@ -6,3 +6,6 @@ exports.articleRoute = (0, express_1.Router)();
 exports.articleRoute.get('/', function (req, res) {
     res.send({ msg: 'Yoyoyo2' });
 });
+exports.articleRoute.post('/', function (req, res) {
+    res.send({ msg: 'Yoyoyo2 post' });
+});
