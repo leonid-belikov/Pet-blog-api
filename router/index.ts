@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { articleRoute } from './articleRoute'
+import { tasksRoute } from './tasksRoute'
 
 export const router = Router()
 
-router.use('/article', articleRoute)
+router.use('/tasks', tasksRoute)
