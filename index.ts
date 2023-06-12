@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { router } from './router'
+import mongoose from 'mongoose'
 
 dotenv.config()
 
@@ -15,6 +16,26 @@ app.use(cors())
 
 app.use('/api', router)
 
-app.listen(port, () => {
-  console.log(`Server is running at localhost:${port}`)
-})
+async function start() {
+  const uri = process.env.DB_URI as string
+
+  try {
+    await mongoose.connect(uri)
+      .then(() => {
+        console.log('Database connected ...')
+      })
+      .catch(e => {
+        console.log('Database connect error:', e)
+        throw e
+      })
+
+    app.listen(port, () => {
+      console.log(`Server is running at localhost:${port}`)
+    })
+  } catch (e) {
+    console.log('Error while starting:', e)
+    process.exit(1)
+  }
+}
+
+start()

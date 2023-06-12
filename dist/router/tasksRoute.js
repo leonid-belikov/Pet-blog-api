@@ -39,51 +39,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var dotenv_1 = __importDefault(require("dotenv"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var cors_1 = __importDefault(require("cors"));
-var router_1 = require("./router");
-var mongoose_1 = __importDefault(require("mongoose"));
-dotenv_1.default.config();
-var app = (0, express_1.default)();
-var port = process.env.SERVER_PORT;
-app.use(body_parser_1.default.urlencoded());
-app.use(body_parser_1.default.json());
-app.use((0, cors_1.default)());
-app.use('/api', router_1.router);
-function start() {
-    return __awaiter(this, void 0, void 0, function () {
-        var uri, e_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    uri = process.env.DB_URI;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, mongoose_1.default.connect(uri)
-                            .then(function () {
-                            console.log('Database connected ...');
-                        })
-                            .catch(function (e) {
-                            console.log('Database connect error:', e);
-                            throw e;
-                        })];
-                case 2:
-                    _a.sent();
-                    app.listen(port, function () {
-                        console.log("Server is running at localhost:".concat(port));
-                    });
-                    return [3 /*break*/, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    console.log('Error while starting:', e_1);
-                    process.exit(1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
+exports.tasksRoute = void 0;
+var express_1 = require("express");
+var Task_1 = __importDefault(require("../models/Task"));
+exports.tasksRoute = (0, express_1.Router)();
+exports.tasksRoute.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var query;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Task_1.default.find()];
+            case 1:
+                query = _a.sent();
+                console.log(query);
+                res.send({ query: query });
+                return [2 /*return*/];
+        }
     });
-}
-start();
+}); });
+exports.tasksRoute.post('/:id(\\d+)', function (req, res) {
+    var id = req.params.id;
+    var text = req.body.text;
+    res.send({ msg: "Yoyoyo2 post, id: ".concat(id, ", text: ").concat(text) });
+});
+exports.tasksRoute.put('/:id(\\d+)', function (req, res) {
+    var id = req.params.id;
+    var text = req.body.text;
+    res.send({ msg: "Yoyoyo2 put, id: ".concat(id, ", text: ").concat(text) });
+});
+exports.tasksRoute.delete('/:id(\\d+)', function (req, res) {
+    var id = req.params.id;
+    res.send({ msg: "Yoyoyo2 delete, id: ".concat(id) });
+});

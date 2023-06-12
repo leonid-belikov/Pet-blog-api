@@ -1,9 +1,19 @@
 import { Router, Request, Response } from 'express'
+import Task from '../models/Task'
 
 export const tasksRoute = Router()
 
-tasksRoute.get('/', (req: Request, res: Response) => {
-    res.send({ msg: 'Yoyoyo2' })
+tasksRoute.get('/', async (req: Request, res: Response) => {
+    const query = await Task.find()
+    console.log(query)
+    res.send({ query })
+/*
+    if (!data || data.length === 0) {
+        res.send({})
+    } else {
+        res.send(data);
+    }
+*/
 })
 
 tasksRoute.post('/:id(\\d+)', (req: Request, res: Response) => {
