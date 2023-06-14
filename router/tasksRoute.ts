@@ -4,31 +4,23 @@ import Task from '../models/Task'
 export const tasksRoute = Router()
 
 tasksRoute.get('/', async (req: Request, res: Response) => {
-    const query = await Task.find()
-    console.log(query)
-    res.send({ query })
-/*
-    if (!data || data.length === 0) {
-        res.send({})
-    } else {
-        res.send(data);
-    }
-*/
+  const query = await Task.find()
+  res.json(query)
 })
 
-tasksRoute.post('/:id(\\d+)', (req: Request, res: Response) => {
-    const id = req.params.id
-    const text = req.body.text
-    res.send({ msg: `Yoyoyo2 post, id: ${id}, text: ${text}` })
+tasksRoute.post('/', (req: Request, res: Response) => {
+  const { title, executor, description } = req.body
+  // Write to DB
+  res.sendStatus(200)
 })
 
 tasksRoute.put('/:id(\\d+)', (req: Request, res: Response) => {
-    const id = req.params.id
-    const text = req.body.text
-    res.send({ msg: `Yoyoyo2 put, id: ${id}, text: ${text}` })
+  const id = req.params.id
+  const text = req.body.text
+  res.send({ msg: `Yoyoyo2 put, id: ${id}, text: ${text}` })
 })
 
 tasksRoute.delete('/:id(\\d+)', (req: Request, res: Response) => {
-    const id = req.params.id
-    res.send({ msg: `Yoyoyo2 delete, id: ${id}` })
+  const id = req.params.id
+  res.send({ msg: `Yoyoyo2 delete, id: ${id}` })
 })

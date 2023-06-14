@@ -52,6 +52,7 @@ app.use(body_parser_1.default.urlencoded());
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
 app.use('/api', router_1.router);
+// TODO: Consider adding errors handling
 function start() {
     return __awaiter(this, void 0, void 0, function () {
         var uri, e_1;

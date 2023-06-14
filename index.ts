@@ -15,6 +15,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/api', router)
+// TODO: Consider adding errors handling
 
 async function start() {
   const uri = process.env.DB_URI as string

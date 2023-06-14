@@ -50,16 +50,15 @@ exports.tasksRoute.get('/', function (req, res) { return __awaiter(void 0, void 
             case 0: return [4 /*yield*/, Task_1.default.find()];
             case 1:
                 query = _a.sent();
-                console.log(query);
-                res.send({ query: query });
+                res.json(query);
                 return [2 /*return*/];
         }
     });
 }); });
-exports.tasksRoute.post('/:id(\\d+)', function (req, res) {
-    var id = req.params.id;
-    var text = req.body.text;
-    res.send({ msg: "Yoyoyo2 post, id: ".concat(id, ", text: ").concat(text) });
+exports.tasksRoute.post('/', function (req, res) {
+    var _a = req.body, title = _a.title, executor = _a.executor, description = _a.description;
+    // Write to DB
+    res.sendStatus(200);
 });
 exports.tasksRoute.put('/:id(\\d+)', function (req, res) {
     var id = req.params.id;
