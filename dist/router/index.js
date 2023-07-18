@@ -2,6 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 var express_1 = require("express");
-var tasksRoute_1 = require("./tasksRoute");
+var tasksRouter_1 = require("./tasksRouter");
+var employeesRouter_1 = require("./employeesRouter");
+var toolsRouter_1 = require("./toolsRouter");
+var statusesRouter_1 = require("./statusesRouter");
 exports.router = (0, express_1.Router)();
-exports.router.use('/tasks', tasksRoute_1.tasksRoute);
+exports.router.use('/tasks', tasksRouter_1.tasksRouter);
+exports.router.use('/employees', employeesRouter_1.employeesRouter);
+exports.router.use('/tools', toolsRouter_1.toolsRouter);
+exports.router.use('/statuses', statusesRouter_1.statusesRouter);

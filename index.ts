@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
@@ -15,7 +15,13 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/api', router)
-// TODO: Consider adding errors handling
+
+const errorHandler = (err: Error, req: Request, res: Response) => {
+  console.log( 'errorHandler:', err.message)
+  res.status(500).send(err.message)
+}
+
+app.use(errorHandler)
 
 async function start() {
   const uri = process.env.DB_URI as string

@@ -39,33 +39,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tasksRoute = void 0;
+exports.statusesRouter = void 0;
 var express_1 = require("express");
-var Task_1 = __importDefault(require("../models/Task"));
-exports.tasksRoute = (0, express_1.Router)();
-exports.tasksRoute.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query;
+var Status_1 = __importDefault(require("../models/Status"));
+exports.statusesRouter = (0, express_1.Router)();
+exports.statusesRouter.get('/', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var query, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, Task_1.default.find()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, Status_1.default.find()];
             case 1:
                 query = _a.sent();
                 res.json(query);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                next(err_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });
-exports.tasksRoute.post('/', function (req, res) {
-    var _a = req.body, title = _a.title, executor = _a.executor, description = _a.description;
-    // Write to DB
-    res.sendStatus(200);
-});
-exports.tasksRoute.put('/:id(\\d+)', function (req, res) {
-    var id = req.params.id;
-    var text = req.body.text;
-    res.send({ msg: "Yoyoyo2 put, id: ".concat(id, ", text: ").concat(text) });
-});
-exports.tasksRoute.delete('/:id(\\d+)', function (req, res) {
-    var id = req.params.id;
-    res.send({ msg: "Yoyoyo2 delete, id: ".concat(id) });
-});
